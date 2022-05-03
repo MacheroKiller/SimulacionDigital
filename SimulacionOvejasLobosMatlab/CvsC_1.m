@@ -1,35 +1,13 @@
-function t = CvsC_1(a,n)
-
-LobosVector = zeros(1,n);
-ConejosVector = zeros(1,n);
-EspacioVector = zeros(1,n);
+function t = CvsC(a,n)
+z = a;
 
 [axiX, axiY] = size(a);
 % Población inicial
+pri = numel(a(a==2));
+disp(pri);
+
 for i = 1:n
    
-    Lobos = numel(a(a==3));
-    Conejos = numel(a(a==2));
-    EspaciosVacios = numel(a(a==1));
-    
-    LobosVector(1,i) = Lobos; 
-    ConejosVector(1,i) = Conejos; 
-    EspacioVector(1,i) = EspaciosVacios; 
-    
-    
-     % Contador de lobos, conejos y espacios vacios por iteración.
-    comentarioA  = sprintf('Lobos: %i',Lobos);
-    comentarioB = sprintf('Conejos: %i',Conejos);
-    comentarioC = sprintf('Espacios Vacios: %i',EspaciosVacios);
-    comentarioD = sprintf('Iterracion #%i',i);
-    
-    disp(comentarioD)
-    disp(comentarioA)
-    disp(comentarioB)
-    disp(comentarioC)
-    fprintf('\n')
-
- 
 for b = 1:axiY
     for c= 1:axiX
     % esta parte es para valores que no estan en los bordes ya que los
@@ -483,7 +461,7 @@ for b = 1:axiY
                         a(b,c-1) = 2;end
                         
                     if a(b+1,c-1) == 1
-                        a(b+1,c-1) = 2;end
+                        a(b+1,c-1) = 2;end 
                         
                 %fin de la verificacio
                 end
@@ -539,6 +517,7 @@ for b = 1:axiY
 
 
                 if  (a(b,c+1) == 2) || a(b-1,c) == 2 || a(b-1,c+1) == 2
+                    
                 %verificamos los valores que rodean al conejo
                 if a(b,c+1) == 2
                     % verificamos los valores alrededor del conejo si es 1
@@ -618,38 +597,11 @@ for b = 1:axiY
 end
 
 % Esto muestra la cantidad de algo por iteración
+t = a;
+pri = numel(a(a==2));
+disp(pri);
 
 end
 
-% Grafica de resultados.
-vectorContador = [1:n];
-
-%Lobos
-figure 
-parteX = vectorContador;
-parteY = LobosVector;
-plot(parteX,parteY)
-xlabel('Iteracion')
-ylabel('Cantidad')
-title('Poblacion de lobos por iteracion')
-
-%Conejos
-figure 
-parteX = vectorContador;
-parteY = ConejosVector;
-plot(parteX,parteY)
-xlabel('Iteracion')
-ylabel('Cantidad')
-title('Poblacion de conejos por iteracion')
-
-%Espacios Vacios
-figure 
-parteX = vectorContador;
-parteY = EspacioVector;
-plot(parteX,parteY)
-xlabel('Iteracion')
-ylabel('Cantidad')
-title('Cantidad de espacios vacios por iteracion')
-hold on;
 end
 
